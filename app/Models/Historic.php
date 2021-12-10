@@ -10,4 +10,6 @@ class Historic extends Model
     use HasFactory;
 
     public $timestamps = "false";
+
+    protected $fillable = ['type','amount','total_before','total_after','user_id_transaction','date','user_id'];
 }

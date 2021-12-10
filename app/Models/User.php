@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Balance;
+use App\Models\Historic;
+
 
 class User extends Authenticatable
 {
@@ -18,6 +20,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -49,4 +52,10 @@ class User extends Authenticatable
 
 
     }
+    public function historics(){
+        //1 para muitos
+        return $this->hasMany(Historic::class);
+    }
+
+    
 }

@@ -43,13 +43,18 @@ class BalanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Balance $balance,Request $request)
+    public function store( Request $request)
     {
         //dd($request->all());
 
-        $balance->deposit($request->amount);
-        
+       // $balance->deposit($request->amount);
+       //dd(auth()->user()->balance()->firstOrCreate([
 
+
+       $balance = auth()->user()->balance()->firstOrCreate([]);
+               $balance->deposit($request->amount);
+
+           return redirect()->route('saldo');
           
 
     }

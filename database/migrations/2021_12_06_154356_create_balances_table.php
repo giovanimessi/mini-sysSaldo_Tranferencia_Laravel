@@ -19,9 +19,10 @@ class CreateBalancesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
 
-            $table->double('amount',10,2);
+            $table->double('amount',10,2)->default(0);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
 
 
         });
