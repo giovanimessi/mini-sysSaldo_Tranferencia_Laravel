@@ -16,7 +16,7 @@
 @section('content')
 <div class="box">
     <div class="box-header ">
-       <h3>Fazer Recarga</h3>
+       <h3>Fazer Retirada</h3>
 
 
 
@@ -24,13 +24,13 @@
     <div class="box-body">
 
         @include('admin.includes.alerts')
-        <form method="POST" action="{{route('store')}}">
+        <form method="POST" action="{{route('drawstore')}}">
             @csrf
             <div class="form-group">
-                <input type="text" name="amount" placelholder=" valo da recargar" >
+                <input type="text" name="amount" placelholder=" valor da retirada" >
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success">Recarregar</button>
+                <button type="submit" class="btn btn-success">Sacar</button>
             </div>
         </form>
     </div>

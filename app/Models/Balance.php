@@ -56,5 +56,55 @@ class Balance extends Model
             ];
         }
     }
+        public function withDrall(float $amount) : Array{
+          if($this->amount < $amount){
+              return [
+                  'success' => false,
+                  'message' => "Saldo Insuficiente",
+              ];
+
+          }
+
+            DB::beginTransaction();
+
+            $totalbefore = $this->amount ? $this->amount :  0;
+           // dd( $totalbefore);
+            $this->amount -= $amount;
+            //dd( $this->amount);
+            $balance = $this->save();
+           // dd( $balance);
+    
+          $historico = auth()->user()->historics()->create([
+            
+            'type'           => "O",
+            'amount'         => $amount,
+            'total_before'   => $totalbefore,
+            'total_after'    => $this->amount,
+            'date'           => date('Ymd'),
+          
+            
+           ]);
+           
+    
+    
+            if($balance && $historico){
+                DB::commit();
+                return [
+                    'success' => true,
+                    'message' => 'Sucesso na retirada do valor',
+                ];
+                 }else{
+                    DB::rollBack();
+                 
+                return [
+                    'danger' => FALSE,
+                    'message' => 'Falha no saque',
+                    
+                ];
+            }
+
+
+        }
+    
 
 }

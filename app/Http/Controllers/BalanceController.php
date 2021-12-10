@@ -52,9 +52,20 @@ class BalanceController extends Controller
 
 
        $balance = auth()->user()->balance()->firstOrCreate([]);
-               $balance->deposit($request->amount);
+           $response = $balance->deposit($request->amount);
 
-           return redirect()->route('saldo');
+          if($response['success']){
+
+           return redirect()->route('saldo')
+           ->with("success" ,$response['message']);
+
+
+           return redirect()
+              -> back()
+              ->with("error" ,$response['message']);
+
+
+            }
           
 
     }
@@ -68,6 +79,41 @@ class BalanceController extends Controller
     public function show($id)
     {
         //
+    }
+    public function withDrall(){
+        return view('admin.balance.withdraw');
+
+
+    }
+    public function withDrallstore(ValdateFormRequest $request){
+
+      //  dd($request->all());
+
+       $balance = auth()->user()->balance()->firstOrCreate([]);
+       $response = $balance->withDrall($request->amount);
+
+      if($response['success']){
+
+       return redirect()->route('saldo')
+       ->with("success" ,$response['message']);
+
+
+       return redirect()
+          ->back()
+          ->with("error" ,$response['message']);
+      }else{
+        return redirect()->route('saldo')
+        ->with("error" ,$response['message']);
+      }
+    }
+    public function transfer(){
+
+        return view('admin.balance.transferencia');
+
+    }
+
+    public function transfstore(Request $request){
+        dd(auth()->user()->balance()->firstOrcreate([]));
     }
 
     /**

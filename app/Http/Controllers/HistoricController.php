@@ -13,7 +13,6 @@ class HistoricController extends Controller
      */
     public function index()
     {
-        return view('admin.historico.index');
     }
 
     /**

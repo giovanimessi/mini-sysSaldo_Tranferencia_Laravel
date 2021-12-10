@@ -27,7 +27,14 @@ Route::group(['middleware' => ['auth'], 'namespace'=>'Admin'], function (){
     Route::post('/admin/store', [BalanceController::class, 'store'])->name('store');
 
 
-    Route::get('/admin/historico', [HistoricController::class, 'index'])->name('historico');
+    Route::get('/admin/widthdraw', [BalanceController::class, 'withDrall'])->name('draw');
+    Route::post('/admin/widthdraw', [BalanceController::class, 'withDrallstore'])->name('drawstore');
+
+    //transferencia
+
+    Route::get("/admin/transferir",[BalanceController::class, 'transfer'])->name('transf');
+    Route::post('/admin/transferencia/store',[BalanceController::class,'transfstore'])->name('transfstore');
+
 
 
 
