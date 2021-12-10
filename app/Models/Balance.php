@@ -6,6 +6,8 @@ use GrahamCampbell\ResultType\Success;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Historic;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Else_;
 
 class Balance extends Model
 {
@@ -15,9 +17,10 @@ class Balance extends Model
 
 
     public function deposit(float $amount) : Array{
-    
+      
+        DB::beginTransaction();
 
-        $totalbefore = $this->amount;
+        $totalbefore = $this->amount ? $this->amount :  0;
        // dd( $totalbefore);
         $this->amount += $amount;
         //dd( $this->amount);
@@ -38,10 +41,14 @@ class Balance extends Model
 
 
         if($balance && $historico){
+            DB::commit();
             return [
                 'success' => true,
                 'message' => 'Sucesso ao recarregar'
             ];
+             }else{
+                DB::rollBack();
+             
             return [
                 'danger' => FALSE,
                 'message' => 'Falha ao recarregar'

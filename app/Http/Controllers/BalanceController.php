@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ValdateFormRequest;  
 class BalanceController extends Controller
 {
     /**
@@ -43,7 +43,7 @@ class BalanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( Request $request)
+    public function store( ValdateFormRequest $request)
     {
         //dd($request->all());
 

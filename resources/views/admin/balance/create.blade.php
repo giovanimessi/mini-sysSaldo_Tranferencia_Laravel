@@ -22,6 +22,16 @@
 
     </div>
     <div class="box-body">
+
+        @if ($errors->any())
+        <div class="alert alert-warning">
+            @foreach ($errors->all() as $error)
+            <p>{{$error}}</p>
+                
+            @endforeach
+        </div>
+            
+        @endif
         <form method="POST" action="{{route('store')}}">
             @csrf
             <div class="form-group">
