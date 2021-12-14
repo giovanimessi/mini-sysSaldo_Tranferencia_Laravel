@@ -277,7 +277,7 @@ return [
                 ],
                 [
                     'text'        => 'Historico',  
-                    'url'         => 'admin/historico',
+                    'url'         => 'admin/transferir',
                     'icon'        => ' far fa-calendar',
 
                  

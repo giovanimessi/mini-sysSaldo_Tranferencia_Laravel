@@ -31,9 +31,10 @@ Route::group(['middleware' => ['auth'], 'namespace'=>'Admin'], function (){
     Route::post('/admin/widthdraw', [BalanceController::class, 'withDrallstore'])->name('drawstore');
 
     //transferencia
+    Route::post('/admin/transf',[BalanceController::class, 'confirmar'])->name('confirmar.store');
 
     Route::get("/admin/transferir",[BalanceController::class, 'transfer'])->name('transf');
-    Route::post('/admin/transferencia/store',[BalanceController::class,'transfstore'])->name('transfstore');
+    Route::post("/admin/transferencia/confirm",[BalanceController::class,'transfstore'])->name('transfstore1');
 
 
 

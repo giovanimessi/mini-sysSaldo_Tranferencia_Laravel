@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balance;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\ValdateFormRequest;  
 class BalanceController extends Controller
@@ -112,8 +114,39 @@ class BalanceController extends Controller
 
     }
 
-    public function transfstore(Request $request){
-        dd(auth()->user()->balance()->firstOrcreate([]));
+    public function transfstore(Request $request,User $user){
+       //dd(auth()->user()->balance()->firstOrcreate([]));
+
+       if (!$sender = $user->getSender($request->sender)){
+
+          
+        return redirect()
+          ->back()
+          ->with('error','Usuario informado nao foi encontrado!');
+
+          if ($sender->id === auth()->user()->id ){
+
+          
+              return redirect()
+                ->back()
+                ->with('error','Não pode transferir para o mesmo');
+
+
+              
+              }
+
+   }
+
+
+   return view('admin.balance.transfer-confirm',compact('sender'));
+
+         
+    }
+
+    public function confirmar(Request $request){
+
+   dd($request->all());
+
     }
 
     /**
